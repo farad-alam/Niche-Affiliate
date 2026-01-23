@@ -27,7 +27,7 @@ export default async function Footer() {
           {/* Logo & Description */}
           <div>
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <Logo logoUrl={logoUrl} alt={settings.logo?.alt || settings.title} />
+              <Logo logoUrl={logoUrl} alt={settings.logo?.alt || settings.title || undefined} />
               <h3 className="text-lg font-semibold">{settings.title}</h3>
             </Link>
             <p className="text-sm">{settings.description}</p>
