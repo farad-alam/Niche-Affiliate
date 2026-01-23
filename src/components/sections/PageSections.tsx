@@ -69,10 +69,9 @@ export default function PageSections({
     >
       {sections?.map((section: any) => {
         const { _key, _type, ...sectionProps } = section;
-        const SectionComponent = SECTION_COMPONENTS[_type];
-
-        if (!SectionComponent) {
-          return (
+        // Verify _type is a valid key before accessing SECTION_COMPONENTS
+        if (!Object.prototype.hasOwnProperty.call(SECTION_COMPONENTS, _type)) { 
+           return (
             <div
               key={_key}
               className="flex items-center justify-center p-8 my-8 text-center text-muted-foreground bg-muted rounded-lg"
@@ -81,6 +80,8 @@ export default function PageSections({
             </div>
           );
         }
+        
+        const SectionComponent = SECTION_COMPONENTS[_type as PageSectionstype];
 
         return (
           <div
