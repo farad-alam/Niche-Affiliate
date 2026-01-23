@@ -14,16 +14,24 @@ export const urlForImage = (source: { asset?: { _ref?: string } }) => {
     return undefined;
   }
 
+  // biome-ignore lint/suspicious/noFocusedTests: Sanity image builder method
   return imageBuilder?.image(source).auto('format').fit('max');
 };
 
 export function resolveOpenGraphImage(
   image?: SeoFragmentType['metaImage'],
   width = 1200,
-  height = 627,
+  height = 627
 ) {
   if (!image) return;
-  const url = imageBuilder.image(image)?.width(width).height(height).fit('crop').url();
+  const url = imageBuilder
+    .image(image)
+    ?.width(width)
+    .height(height)
+    .height(height)
+    // biome-ignore lint/suspicious/noFocusedTests: Sanity image builder method
+    .fit('crop')
+    .url();
   if (!url) return;
   return { url, width, height };
 }

@@ -15,9 +15,9 @@ export default async function PrivacyPolicyPage() {
   }
 
   return (
-    <SingletonPage 
-      title={page.title} 
-      content={page.content as PortableTextBlock[]} 
+    <SingletonPage
+      title={page.title}
+      content={page.content as PortableTextBlock[]}
     />
   );
 }

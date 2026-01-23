@@ -1,5 +1,5 @@
 import type { PortableTextBlock } from 'next-sanity';
-import React from 'react';
+
 import { AffiliateDisclosure } from '@/components/modules/AffiliateDisclosure';
 import Byline from '@/components/modules/Byline';
 import CoverImage from '@/components/modules/CoverImage';
@@ -27,9 +27,9 @@ const Post = ({ post }: Props) => {
           <CoverImage image={post.mainImage} priority />
         </div>
       ) : null}
-      
+
       <h1 className="text-3xl md:text-5xl font-bold mb-6">{post.title}</h1>
-      
+
       {/* Product Rating (if it's a review) */}
       {affiliatePost?.productRating && affiliatePost.productRating > 0 && (
         <div className="mb-6 p-4 bg-gray-50 border border-gray-200 rounded-lg inline-block">
@@ -37,7 +37,7 @@ const Post = ({ post }: Props) => {
           <StarRating rating={affiliatePost.productRating} />
         </div>
       )}
-      
+
       {post.author ? (
         <div className="mb-6">
           <Byline post={post} />
@@ -52,7 +52,7 @@ const Post = ({ post }: Props) => {
         <div className="order-2 lg:order-1">
           <CustomPortableText value={post.body as PortableTextBlock[]} />
         </div>
-        
+
         {/* Table of Contents (sticky on desktop) */}
         {affiliatePost?.showTableOfContents && (
           <aside className="order-1 lg:order-2">

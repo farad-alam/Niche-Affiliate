@@ -1,9 +1,9 @@
 import { defineQuery } from 'next-sanity';
 import {
+  authorFragment,
   categoryFragment,
   menuFragment,
   pageFragment,
-  authorFragment,
   postCardFragment,
   postFragment,
 } from './fragments/fragments';

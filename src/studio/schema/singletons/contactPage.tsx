@@ -29,7 +29,8 @@ export default defineType({
       name: 'content',
       title: 'Content',
       type: 'blockContent',
-      description: 'Contact page content - add your contact information or embed a form',
+      description:
+        'Contact page content - add your contact information or embed a form',
       group: 'content',
     }),
     defineField({

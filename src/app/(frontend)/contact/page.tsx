@@ -15,14 +15,14 @@ export default async function ContactPage() {
   }
 
   return (
-    <SingletonPage 
-      title={page.title} 
+    <SingletonPage
+      title={page.title}
       content={page.content as PortableTextBlock[]}
     >
       {page.email && (
         <div className="mt-8 p-6 bg-gray-50 border border-gray-200 rounded-lg">
           <h3 className="text-xl font-bold mb-2">Email Us</h3>
-          <a 
+          <a
             href={`mailto:${page.email}`}
             className="text-orange-600 hover:text-orange-700 font-medium"
           >

@@ -25,7 +25,8 @@ export default defineType({
       name: 'logo',
       title: 'Site Logo',
       type: 'image',
-      description: 'Upload your custom logo. Recommended: SVG or PNG with transparent background. If not provided, the site title will be displayed.',
+      description:
+        'Upload your custom logo. Recommended: SVG or PNG with transparent background. If not provided, the site title will be displayed.',
       options: {
         hotspot: true,
       },
@@ -46,7 +47,8 @@ export default defineType({
     }),
     defineField({
       name: 'description',
-      description: 'Used both for the <meta> description tag for SEO, and the blog subheader.',
+      description:
+        'Used both for the <meta> description tag for SEO, and the blog subheader.',
       title: 'Description',
       type: 'text',
     }),
@@ -67,7 +69,8 @@ export default defineType({
       name: 'footerText',
       title: 'Footer Copyright Text',
       type: 'string',
-      description: 'Custom footer text. Use {year} for current year. Example: "© {year} YourSite. All rights reserved."',
+      description:
+        'Custom footer text. Use {year} for current year. Example: "© {year} YourSite. All rights reserved."',
       initialValue: '© {year} Test Affiliate. All rights reserved.',
     }),
     defineField({
@@ -90,7 +93,8 @@ export default defineType({
           validation: (rule) => {
             return rule.custom((alt, context) => {
               if (
-                (context.document?.ogImage as { asset?: { _ref?: string } })?.asset?._ref &&
+                (context.document?.ogImage as { asset?: { _ref?: string } })
+                  ?.asset?._ref &&
                 !alt
               ) {
                 return 'Required';

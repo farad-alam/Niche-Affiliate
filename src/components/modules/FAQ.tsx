@@ -18,7 +18,10 @@ interface FAQProps {
   faqs: FAQItemType[];
 }
 
-export const FAQ: FC<FAQProps> = ({ title = 'Frequently Asked Questions', faqs }) => {
+export const FAQ: FC<FAQProps> = ({
+  title = 'Frequently Asked Questions',
+  faqs,
+}) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleFAQ = (index: number) => {
@@ -44,19 +47,22 @@ export const FAQ: FC<FAQProps> = ({ title = 'Frequently Asked Questions', faqs }
       {/* JSON-LD Schema */}
       <script
         type="application/ld+json"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD for SEO requires this
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
       {/* FAQ Section */}
       <h2 className="text-3xl font-bold mb-6 text-gray-900">{title}</h2>
-      
+
       <div className="space-y-4">
         {faqs.map((faq, index) => (
           <div
+            // biome-ignore lint/suspicious/noArrayIndexKey: Static list, index is stable
             key={index}
             className="border border-gray-200 rounded-lg overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow"
           >
             <button
+              type="button"
               onClick={() => toggleFAQ(index)}
               className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
               aria-expanded={openIndex === index}
@@ -65,6 +71,7 @@ export const FAQ: FC<FAQProps> = ({ title = 'Frequently Asked Questions', faqs }
                 {faq.question}
               </span>
               <svg
+                aria-hidden="true"
                 className={`w-6 h-6 text-gray-500 transform transition-transform flex-shrink-0 ${
                   openIndex === index ? 'rotate-180' : ''
                 }`}
@@ -72,10 +79,15 @@ export const FAQ: FC<FAQProps> = ({ title = 'Frequently Asked Questions', faqs }
                 stroke="currentColor"
                 viewBox="0 0 24 24"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
               </svg>
             </button>
-            
+
             {openIndex === index && (
               <div className="px-6 pb-4 pt-2 text-gray-700 leading-relaxed border-t border-gray-100">
                 {faq.answer}

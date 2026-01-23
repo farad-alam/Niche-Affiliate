@@ -9,13 +9,13 @@
  */
 export function getAmazonAffiliateId(): string | undefined {
   const affiliateId = process.env.NEXT_PUBLIC_AMAZON_AFFILIATE_ID;
-  
+
   if (!affiliateId && process.env.NODE_ENV === 'development') {
     console.warn(
       '⚠️ NEXT_PUBLIC_AMAZON_AFFILIATE_ID is not set in .env.local. Amazon affiliate links will not include your tracking ID.'
     );
   }
-  
+
   return affiliateId;
 }
 
@@ -25,15 +25,18 @@ export function getAmazonAffiliateId(): string | undefined {
  * @param region - Amazon region code (e.g., 'com', 'co.uk', 'ca')
  * @returns Full Amazon affiliate URL
  */
-export function generateAmazonLink(asin: string, region: string = 'com'): string {
+export function generateAmazonLink(
+  asin: string,
+  region: string = 'com'
+): string {
   const affiliateId = getAmazonAffiliateId();
   const baseUrl = `https://www.amazon.${region}/dp/${asin}`;
-  
+
   // If no affiliate ID is set, return plain Amazon link
   if (!affiliateId) {
     return baseUrl;
   }
-  
+
   // Add affiliate tag as query parameter
   return `${baseUrl}?tag=${affiliateId}`;
 }

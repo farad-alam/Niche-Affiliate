@@ -38,5 +38,11 @@ export default async function Page(props: Props) {
 
   const { _id, _type, pageSections } = page;
 
-  return <PageSections documentId={_id} documentType={_type} sections={pageSections} />;
+  return (
+    <PageSections
+      documentId={_id}
+      documentType={_type}
+      sections={pageSections}
+    />
+  );
 }

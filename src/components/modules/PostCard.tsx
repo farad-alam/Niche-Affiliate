@@ -18,7 +18,9 @@ export default function PostCard({ post }: { post: PostCardFragmentType }) {
         <div className="relative h-64 md:h-full">
           {mainImage ? (
             <Image
-              src={urlForImage(mainImage)?.width(1000).height(667).url() as string}
+              src={
+                urlForImage(mainImage)?.width(1000).height(667).url() as string
+              }
               alt={mainImage?.alt || 'Blog Post Image'}
               style={{
                 objectFit: 'cover',
@@ -38,7 +40,9 @@ export default function PostCard({ post }: { post: PostCardFragmentType }) {
           <div className="flex items-center space-x-4 mb-2">
             {featuredCategory && (
               <Badge variant="default" asChild>
-                <Link href={getDocumentLink(featuredCategory)}>{featuredCategory.title}</Link>
+                <Link href={getDocumentLink(featuredCategory)}>
+                  {featuredCategory.title}
+                </Link>
               </Badge>
             )}
             <ReadTime wordCount={post.wordCount} />
@@ -49,7 +53,10 @@ export default function PostCard({ post }: { post: PostCardFragmentType }) {
             </time>
           ) : null}
           <h3 className="text-2xl font-bold mb-">
-            <Link href={`/blog/${post.slug}`} className="hover:text-pink-600 transition-colors">
+            <Link
+              href={`/blog/${post.slug}`}
+              className="hover:text-pink-600 transition-colors"
+            >
               {title}
             </Link>
           </h3>

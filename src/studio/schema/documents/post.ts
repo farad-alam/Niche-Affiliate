@@ -56,7 +56,8 @@ export default defineType({
             // Custom validation to ensure alt text is provided if the image is present. https://www.sanity.io/docs/validation
             return rule.custom((alt, context) => {
               if (
-                (context.document?.coverImage as { asset?: { _ref?: string } })?.asset?._ref &&
+                (context.document?.coverImage as { asset?: { _ref?: string } })
+                  ?.asset?._ref &&
                 !alt
               ) {
                 return 'Required';
@@ -83,7 +84,8 @@ export default defineType({
       name: 'metadata',
       title: 'Metadata (AutoTent)',
       type: 'object',
-      description: 'Metadata from AutoTent API - will be used as fallback for SEO fields',
+      description:
+        'Metadata from AutoTent API - will be used as fallback for SEO fields',
       group: 'content',
       fields: [
         defineField({
@@ -121,7 +123,8 @@ export default defineType({
       title: 'Product Rating (optional)',
       type: 'number',
       validation: (rule) => rule.min(0).max(5).precision(1),
-      description: 'Overall rating for product reviews (0-5 stars). Leave empty for non-review posts.',
+      description:
+        'Overall rating for product reviews (0-5 stars). Leave empty for non-review posts.',
       group: 'content',
     }),
     defineField({

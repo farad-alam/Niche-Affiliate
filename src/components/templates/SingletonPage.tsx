@@ -4,7 +4,7 @@
  */
 
 import type { PortableTextBlock } from 'next-sanity';
-import React from 'react';
+import type React from 'react';
 import CustomPortableText from '@/components/modules/PortableText';
 
 type Props = {
@@ -17,11 +17,9 @@ const SingletonPage = ({ title, content, children }: Props) => {
   return (
     <div className="container mx-auto max-w-4xl pt-5 md:pt-8 pb-12 px-4">
       <h1 className="text-3xl md:text-5xl font-bold mb-8">{title}</h1>
-      
-      {content && content.length > 0 && (
-        <CustomPortableText value={content} />
-      )}
-      
+
+      {content && content.length > 0 && <CustomPortableText value={content} />}
+
       {children}
     </div>
   );

@@ -18,17 +18,21 @@ interface TableOfContentsProps {
   className?: string;
 }
 
-export const TableOfContents: FC<TableOfContentsProps> = ({ className = '' }) => {
+export const TableOfContents: FC<TableOfContentsProps> = ({
+  className = '',
+}) => {
   const [tocItems, setTocItems] = useState<TocItem[]>([]);
   const [activeId, setActiveId] = useState<string>('');
 
   useEffect(() => {
     // Extract headings from the page
-    const headings = Array.from(document.querySelectorAll('h2, h3')).map((heading) => ({
-      id: heading.id,
-      text: heading.textContent || '',
-      level: Number.parseInt(heading.tagName.substring(1)),
-    }));
+    const headings = Array.from(document.querySelectorAll('h2, h3')).map(
+      (heading) => ({
+        id: heading.id,
+        text: heading.textContent || '',
+        level: Number.parseInt(heading.tagName.substring(1)),
+      })
+    );
 
     setTocItems(headings);
 
@@ -74,14 +78,15 @@ export const TableOfContents: FC<TableOfContentsProps> = ({ className = '' }) =>
   };
 
   return (
-    <nav className={`bg-gray-50 border border-gray-200 rounded-lg p-6 ${className}`}>
-      <h3 className="text-lg font-bold text-gray-900 mb-4">Table of Contents</h3>
+    <nav
+      className={`bg-gray-50 border border-gray-200 rounded-lg p-6 ${className}`}
+    >
+      <h3 className="text-lg font-bold text-gray-900 mb-4">
+        Table of Contents
+      </h3>
       <ul className="space-y-2">
         {tocItems.map((item) => (
-          <li
-            key={item.id}
-            className={`${item.level === 3 ? 'ml-4' : ''}`}
-          >
+          <li key={item.id} className={`${item.level === 3 ? 'ml-4' : ''}`}>
             <a
               href={`#${item.id}`}
               onClick={(e) => handleClick(e, item.id)}

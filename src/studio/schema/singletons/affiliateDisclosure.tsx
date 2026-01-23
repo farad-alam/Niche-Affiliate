@@ -29,7 +29,8 @@ export default defineType({
       name: 'content',
       title: 'Content',
       type: 'blockContent',
-      description: 'Affiliate disclosure - required by Amazon Associates and FTC guidelines',
+      description:
+        'Affiliate disclosure - required by Amazon Associates and FTC guidelines',
       initialValue: [
         {
           _type: 'block',

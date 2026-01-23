@@ -29,7 +29,8 @@ export default defineType({
       name: 'content',
       title: 'Content',
       type: 'blockContent',
-      description: 'Privacy policy content - include Amazon Associates disclosure if applicable',
+      description:
+        'Privacy policy content - include Amazon Associates disclosure if applicable',
       group: 'content',
     }),
     defineField({

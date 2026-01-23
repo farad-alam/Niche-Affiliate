@@ -29,7 +29,8 @@ export default defineType({
       name: 'content',
       title: 'Content',
       type: 'blockContent',
-      description: 'About page content - tell your readers about you and your site',
+      description:
+        'About page content - tell your readers about you and your site',
       group: 'content',
     }),
     defineField({

@@ -23,7 +23,12 @@ export const structure: StructureResolver = (S) =>
       ...S.documentTypeListItems().filter((listItem) => {
         const id = listItem.getId();
         return typeof id !== 'undefined'
-          ? !['settings', 'homePage', 'assist.instruction.context', 'blogPage'].includes(id)
+          ? ![
+              'settings',
+              'homePage',
+              'assist.instruction.context',
+              'blogPage',
+            ].includes(id)
           : false;
       }),
       S.listItem()

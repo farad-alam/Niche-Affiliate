@@ -48,7 +48,11 @@ export default function VideoEmbed({ value }: VideoEmbedProps) {
           title={caption || 'Video'}
         />
       </div>
-      {caption && <p className="text-sm text-gray-600 mt-2 text-center italic">{caption}</p>}
+      {caption && (
+        <p className="text-sm text-gray-600 mt-2 text-center italic">
+          {caption}
+        </p>
+      )}
     </div>
   );
 }

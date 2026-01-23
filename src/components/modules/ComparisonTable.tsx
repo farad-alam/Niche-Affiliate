@@ -43,19 +43,29 @@ export const ComparisonTable: FC<ComparisonTableProps> = ({
   return (
     <div className="my-8">
       <h3 className="text-2xl font-bold mb-6 text-gray-900">{title}</h3>
-      
+
       {/* Desktop Table */}
       <div className="hidden md:block overflow-x-auto">
         <table className="w-full border-collapse bg-white shadow-lg rounded-lg overflow-hidden">
           <thead>
             <tr className="bg-gray-100">
-              <th className="px-6 py-4 text-left font-bold text-gray-900">Product</th>
+              <th className="px-6 py-4 text-left font-bold text-gray-900">
+                Product
+              </th>
               {products.map((product) => (
-                <th key={product.asin} className="px-6 py-4 text-center font-bold text-gray-900 min-w-[200px]">
+                <th
+                  key={product.asin}
+                  className="px-6 py-4 text-center font-bold text-gray-900 min-w-[200px]"
+                >
                   {product.image && (
                     <div className="flex justify-center mb-2">
                       <Image
-                        src={urlForImage(product.image)?.width(150).height(150).url() as string}
+                        src={
+                          urlForImage(product.image)
+                            ?.width(150)
+                            .height(150)
+                            .url() as string
+                        }
                         alt={product.image.alt || product.name}
                         width={150}
                         height={150}
@@ -73,12 +83,15 @@ export const ComparisonTable: FC<ComparisonTableProps> = ({
             <tr className="border-t border-gray-200">
               <td className="px-6 py-4 font-semibold text-gray-700">Price</td>
               {products.map((product) => (
-                <td key={product.asin} className="px-6 py-4 text-center text-green-600 font-bold text-xl">
+                <td
+                  key={product.asin}
+                  className="px-6 py-4 text-center text-green-600 font-bold text-xl"
+                >
                   {product.price || 'Check Amazon'}
                 </td>
               ))}
             </tr>
-            
+
             {/* Rating Row */}
             <tr className="border-t border-gray-200 bg-gray-50">
               <td className="px-6 py-4 font-semibold text-gray-700">Rating</td>
@@ -94,11 +107,13 @@ export const ComparisonTable: FC<ComparisonTableProps> = ({
                 </td>
               ))}
             </tr>
-            
+
             {/* Features Row */}
-            {products.some(p => p.features && p.features.length > 0) && (
+            {products.some((p) => p.features && p.features.length > 0) && (
               <tr className="border-t border-gray-200">
-                <td className="px-6 py-4 font-semibold text-gray-700 align-top">Key Features</td>
+                <td className="px-6 py-4 font-semibold text-gray-700 align-top">
+                  Key Features
+                </td>
                 {products.map((product) => (
                   <td key={product.asin} className="px-6 py-4 text-sm">
                     {product.features && product.features.length > 0 ? (
@@ -117,14 +132,17 @@ export const ComparisonTable: FC<ComparisonTableProps> = ({
                 ))}
               </tr>
             )}
-            
+
             {/* Buy Button Row */}
             <tr className="border-t border-gray-200 bg-gray-50">
               <td className="px-6 py-4 font-semibold text-gray-700">Buy Now</td>
               {products.map((product) => (
                 <td key={product.asin} className="px-6 py-4 text-center">
                   <a
-                    href={generateAmazonLink(product.asin, product.amazonRegion || 'com')}
+                    href={generateAmazonLink(
+                      product.asin,
+                      product.amazonRegion || 'com'
+                    )}
                     target="_blank"
                     rel="noopener noreferrer nofollow sponsored"
                     className="inline-block px-6 py-3 bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600 text-white font-bold rounded-lg shadow-md hover:shadow-lg transition-all"
@@ -141,11 +159,19 @@ export const ComparisonTable: FC<ComparisonTableProps> = ({
       {/* Mobile Cards */}
       <div className="md:hidden space-y-6">
         {products.map((product) => (
-          <div key={product.asin} className="border-2 border-gray-200 rounded-lg p-4 bg-white shadow-md">
+          <div
+            key={product.asin}
+            className="border-2 border-gray-200 rounded-lg p-4 bg-white shadow-md"
+          >
             {product.image && (
               <div className="flex justify-center mb-4">
                 <Image
-                  src={urlForImage(product.image)?.width(200).height(200).url() as string}
+                  src={
+                    urlForImage(product.image)
+                      ?.width(200)
+                      .height(200)
+                      .url() as string
+                  }
                   alt={product.image.alt || product.name}
                   width={200}
                   height={200}
@@ -153,21 +179,27 @@ export const ComparisonTable: FC<ComparisonTableProps> = ({
                 />
               </div>
             )}
-            <h4 className="text-xl font-bold text-gray-900 mb-3">{product.name}</h4>
-            
+            <h4 className="text-xl font-bold text-gray-900 mb-3">
+              {product.name}
+            </h4>
+
             {product.price && (
-              <div className="text-2xl font-bold text-green-600 mb-2">{product.price}</div>
+              <div className="text-2xl font-bold text-green-600 mb-2">
+                {product.price}
+              </div>
             )}
-            
+
             {product.rating && (
               <div className="mb-3">
                 <StarRating rating={product.rating} />
               </div>
             )}
-            
+
             {product.features && product.features.length > 0 && (
               <div className="mb-4">
-                <h5 className="font-semibold text-gray-700 mb-2">Key Features:</h5>
+                <h5 className="font-semibold text-gray-700 mb-2">
+                  Key Features:
+                </h5>
                 <ul className="space-y-1 text-sm">
                   {product.features.map((feature, fIndex) => (
                     <li key={fIndex} className="flex items-start gap-2">
@@ -178,9 +210,12 @@ export const ComparisonTable: FC<ComparisonTableProps> = ({
                 </ul>
               </div>
             )}
-            
+
             <a
-              href={generateAmazonLink(product.asin, product.amazonRegion || 'com')}
+              href={generateAmazonLink(
+                product.asin,
+                product.amazonRegion || 'com'
+              )}
               target="_blank"
               rel="noopener noreferrer nofollow sponsored"
               className="block text-center px-6 py-3 bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600 text-white font-bold rounded-lg shadow-md hover:shadow-lg transition-all"

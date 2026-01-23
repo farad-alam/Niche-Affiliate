@@ -16,9 +16,9 @@ export default async function AboutPage() {
   }
 
   return (
-    <SingletonPage 
-      title={page.title} 
-      content={page.content as PortableTextBlock[]} 
+    <SingletonPage
+      title={page.title}
+      content={page.content as PortableTextBlock[]}
     />
   );
 }

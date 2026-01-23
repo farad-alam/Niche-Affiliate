@@ -18,7 +18,13 @@ export default function Byline({ post }: { post: PostCardFragmentType }) {
               height={48}
               width={48}
               src={
-                urlForImage(post.author?.image)?.height(96).width(96).fit('crop').url() as string
+                urlForImage(post.author?.image)
+                  ?.height(96)
+                  .width(96)
+                  .width(96)
+                  // biome-ignore lint/suspicious/noFocusedTests: Sanity image builder method
+                  .fit('crop')
+                  .url() as string
               }
             />
           </div>
@@ -27,7 +33,10 @@ export default function Byline({ post }: { post: PostCardFragmentType }) {
         )}
         <div className="flex flex-col">
           {post.author?.name && post.author?.slug ? (
-            <Link href={`/author/${post.author.slug}`} className="text-gray-900 hover:underline">
+            <Link
+              href={`/author/${post.author.slug}`}
+              className="text-gray-900 hover:underline"
+            >
               {post.author.name}
             </Link>
           ) : null}
@@ -41,7 +50,9 @@ export default function Byline({ post }: { post: PostCardFragmentType }) {
           <div className="flex items-center gap-2">
             {post.categories.filter(Boolean).map((category: any) => (
               <Badge variant="default" asChild key={category._id}>
-                <Link href={`/category/${category.slug}`}>{category.title}</Link>
+                <Link href={`/category/${category.slug}`}>
+                  {category.title}
+                </Link>
               </Badge>
             ))}
           </div>

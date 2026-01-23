@@ -22,8 +22,13 @@ export default async function Header() {
         <div className="flex items-center space-x-4">
           {typeof settings.title !== 'undefined' && (
             <Link className="flex items-center space-x-4" href="/">
-              <Logo logoUrl={logoUrl} alt={settings.logo?.alt || settings.title || undefined} />
-              <span className="text-lg md:text-2xl font-bold">{settings.title}</span>
+              <Logo
+                logoUrl={logoUrl}
+                alt={settings.logo?.alt || settings.title || undefined}
+              />
+              <span className="text-lg md:text-2xl font-bold">
+                {settings.title}
+              </span>
             </Link>
           )}
         </div>

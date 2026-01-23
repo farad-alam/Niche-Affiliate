@@ -39,10 +39,14 @@ export default defineType({
       title: 'Amazon ASIN',
       type: 'string',
       description: 'Amazon Standard Identification Number (e.g., B08N5WRWNW)',
-      validation: (rule) => rule.required().regex(/^[A-Z0-9]{10}$/, {
-        name: 'ASIN',
-        invert: false,
-      }).error('ASIN must be exactly 10 alphanumeric characters'),
+      validation: (rule) =>
+        rule
+          .required()
+          .regex(/^[A-Z0-9]{10}$/, {
+            name: 'ASIN',
+            invert: false,
+          })
+          .error('ASIN must be exactly 10 alphanumeric characters'),
     }),
     defineField({
       name: 'price',

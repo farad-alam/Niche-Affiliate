@@ -1,4 +1,6 @@
-export function getVideoId(url: string): { platform: 'youtube' | 'vimeo'; id: string } | null {
+export function getVideoId(
+  url: string
+): { platform: 'youtube' | 'vimeo'; id: string } | null {
   // YouTube patterns
   const youtubePatterns = [
     /(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\s]+)/,

@@ -49,9 +49,10 @@ export default defineType({
               name: 'asin',
               title: 'Amazon ASIN',
               type: 'string',
-              validation: (rule) => rule.required().regex(/^[A-Z0-9]{10}$/, {
-                name: 'ASIN',
-              }),
+              validation: (rule) =>
+                rule.required().regex(/^[A-Z0-9]{10}$/, {
+                  name: 'ASIN',
+                }),
             }),
             defineField({
               name: 'price',

@@ -42,7 +42,11 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
   // Open Graph image fallback: seo.metaImage → mainImage
   // Note: asset is expanded in the GROQ query with asset->{...}
-  const ogImage = (post.seo?.metaImage?.asset as any)?.url || (post.mainImage?.asset as any)?.url;
+  const ogImage =
+    // biome-ignore lint/suspicious/noExplicitAny: Schema type mismatch
+    (post.seo?.metaImage?.asset as any)?.url ||
+    // biome-ignore lint/suspicious/noExplicitAny: Schema type mismatch
+    (post.mainImage?.asset as any)?.url;
 
   return {
     title,
@@ -65,7 +69,9 @@ export async function generateStaticParams() {
   });
 
   const staticParams = slugs
-    ? slugs.filter((slug): slug is string => slug !== null).map((slug) => ({ slug: slug }))
+    ? slugs
+        .filter((slug): slug is string => slug !== null)
+        .map((slug) => ({ slug: slug }))
     : [];
 
   return [...staticParams];

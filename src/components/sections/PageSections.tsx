@@ -4,7 +4,10 @@ import type { SanityDocument } from 'next-sanity';
 import { useOptimistic } from 'next-sanity/hooks';
 import type { ElementType } from 'react';
 import { dataAttr } from '@/lib/sanity/client/utils';
-import type { SectionsType, SectionType } from '@/lib/sanity/queries/fragments/fragment.types';
+import type {
+  SectionsType,
+  SectionType,
+} from '@/lib/sanity/queries/fragments/fragment.types';
 import CardGrid from './CardGrid';
 import CTA from './CTA';
 import Divider from './Divider';
@@ -48,11 +51,14 @@ export default function PageSections({
       }
 
       return action.document.pageSections.map(
+        // biome-ignore lint/suspicious/noExplicitAny: Sanity document structure
         (section: any) =>
-          currentSections?.find((currentSection: any) => currentSection._key === section?._key) ||
-          section,
+          currentSections?.find(
+            // biome-ignore lint/suspicious/noExplicitAny: Sanity document structure
+            (currentSection: any) => currentSection._key === section?._key
+          ) || section
       );
-    },
+    }
   );
 
   if (!sections?.length) {
@@ -70,8 +76,8 @@ export default function PageSections({
       {sections?.map((section: any) => {
         const { _key, _type, ...sectionProps } = section;
         // Verify _type is a valid key before accessing SECTION_COMPONENTS
-        if (!Object.prototype.hasOwnProperty.call(SECTION_COMPONENTS, _type)) { 
-           return (
+        if (!Object.hasOwn(SECTION_COMPONENTS, _type)) {
+          return (
             <div
               key={_key}
               className="flex items-center justify-center p-8 my-8 text-center text-muted-foreground bg-muted rounded-lg"
@@ -80,7 +86,7 @@ export default function PageSections({
             </div>
           );
         }
-        
+
         const SectionComponent = SECTION_COMPONENTS[_type as PageSectionstype];
 
         return (
