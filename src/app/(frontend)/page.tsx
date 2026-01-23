@@ -1,25 +1,41 @@
 import Link from 'next/link';
+import { defineQuery } from 'next-sanity';
 import { sanityFetch } from '@/lib/sanity/client/live';
 
 // Query for recent posts
-const recentPostsQuery = `*[_type == "post"] | order(date desc) [0...6] {
+// Query for recent posts
+const recentPostsQuery = defineQuery(`*[_type == "post"] | order(publishedAt desc) [0...6] {
   title,
   slug,
   excerpt,
-  date,
+  publishedAt,
   "categories": categories[]->title,
-  image {
+  mainImage {
     asset-> {
       url
     },
     alt
   }
-}`;
+}`);
+
+interface RecentPost {
+  title: string;
+  slug: { current: string };
+  excerpt: string;
+  publishedAt: string;
+  categories: string[];
+  mainImage: {
+    asset: {
+      url: string;
+    };
+    alt: string;
+  };
+}
 
 export default async function HomePage() {
-  const { data: posts } = await sanityFetch({
+  const { data: posts } = (await sanityFetch({
     query: recentPostsQuery,
-  });
+  })) as { data: RecentPost[] };
 
   return (
     <div className="min-h-screen">
