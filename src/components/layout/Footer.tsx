@@ -18,7 +18,7 @@ export default async function Footer() {
   // Replace {year} placeholder with current year
   const footerText = settings.footerText?.replace('{year}', new Date().getFullYear().toString()) || `© ${new Date().getFullYear()} ${settings.title}. All rights reserved.`;
 
-  const socialMedia = settings.socialMedia || {};
+  const socialMedia = settings.socialMedia || ({} as NonNullable<typeof settings.socialMedia>);
 
   return (
     <footer className="text-gray-600 py-12 md:py-16 relative bg-gray-100">
