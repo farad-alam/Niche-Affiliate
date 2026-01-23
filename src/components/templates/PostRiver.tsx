@@ -22,7 +22,7 @@ const PostRiver = ({
   return (
     <>
       <div className="grid grid-cols-1 gap-10">
-        {results.map((post) => {
+        {results.map((post: any) => {
           return <PostCard key={post._id} post={post} />;
         })}
       </div>

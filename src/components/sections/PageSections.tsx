@@ -48,8 +48,8 @@ export default function PageSections({
       }
 
       return action.document.pageSections.map(
-        (section) =>
-          currentSections?.find((currentSection) => currentSection._key === section?._key) ||
+        (section: any) =>
+          currentSections?.find((currentSection: any) => currentSection._key === section?._key) ||
           section,
       );
     },
@@ -67,7 +67,7 @@ export default function PageSections({
         path: 'pageSections',
       })}
     >
-      {sections?.map((section) => {
+      {sections?.map((section: any) => {
         const { _key, _type, ...sectionProps } = section;
         const SectionComponent = SECTION_COMPONENTS[_type];
 

@@ -8,8 +8,8 @@ function parseAdditionalMetaTags(additionalMetaTags?: SeoFragmentType['additiona
   }
 
   const otherTags: Record<string, string> = {};
-  additionalMetaTags.forEach((metaTag) => {
-    metaTag?.metaAttributes?.forEach((metaAttribute) => {
+  additionalMetaTags.forEach((metaTag: any) => {
+    metaTag?.metaAttributes?.forEach((metaAttribute: any) => {
       if (metaAttribute?.attributeKey) {
         if (metaAttribute?.attributeType === 'string' && metaAttribute?.attributeValueString) {
           otherTags[metaAttribute.attributeKey] = metaAttribute.attributeValueString;

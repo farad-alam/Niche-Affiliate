@@ -39,7 +39,7 @@ export default function Byline({ post }: { post: PostCardFragmentType }) {
       <div className="flex flex-col items-end gap-2">
         {post.categories && post.categories?.length > 0 && (
           <div className="flex items-center gap-2">
-            {post.categories.filter(Boolean).map((category) => (
+            {post.categories.filter(Boolean).map((category: any) => (
               <Badge variant="default" asChild key={category._id}>
                 <Link href={`/category/${category.slug}`}>{category.title}</Link>
               </Badge>

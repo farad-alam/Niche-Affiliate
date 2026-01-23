@@ -20,7 +20,7 @@ export default function PostListSection({ section }: { section: PostListSectionF
           <p className="text-gray-600">Latest updates and insights from our team</p>
         </div>
         <div className="max-w-4xl mx-auto space-y-12">
-          {posts.slice(0, numberOfPosts).map((post) => (
+          {posts.slice(0, numberOfPosts).map((post: any) => (
             <PostCard key={post._id} post={post} />
           ))}
         </div>

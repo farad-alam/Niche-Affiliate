@@ -11,7 +11,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     const baseUrl = getBaseUrl();
 
-    return paths.map((path) => ({
+    return paths.map((path: any) => ({
       url: new URL(path.href!, baseUrl).toString(),
       lastModified: new Date(path._updatedAt),
       changeFrequency: 'weekly',
