@@ -8,7 +8,7 @@ import { urlForImage } from '@/lib/sanity/client/utils';
 import type { PostCardFragmentType } from '@/lib/sanity/queries/fragments/fragment.types';
 
 export default function PostCard({ post }: { post: PostCardFragmentType }) {
-  const { title, excerpt, date, author, image, categories } = post;
+  const { title, excerpt, publishedAt, author, mainImage, categories } = post;
 
   const featuredCategory = categories?.[0];
 
@@ -16,10 +16,10 @@ export default function PostCard({ post }: { post: PostCardFragmentType }) {
     <article className="relative bg-white rounded-2xl shadow-sm overflow-hidden">
       <div className="grid md:grid-cols-2 gap-6">
         <div className="relative h-64 md:h-full">
-          {image ? (
+          {mainImage ? (
             <Image
-              src={urlForImage(image)?.width(1000).height(667).url() as string}
-              alt={image?.alt || 'Blog Post Image'}
+              src={urlForImage(mainImage)?.width(1000).height(667).url() as string}
+              alt={mainImage?.alt || 'Blog Post Image'}
               style={{
                 objectFit: 'cover',
                 position: 'absolute',
@@ -43,9 +43,9 @@ export default function PostCard({ post }: { post: PostCardFragmentType }) {
             )}
             <ReadTime wordCount={post.wordCount} />
           </div>
-          {date ? (
+          {publishedAt ? (
             <time className="text-sm text-gray-500 mb-4">
-              {new Date(date).toLocaleDateString()}
+              {new Date(publishedAt).toLocaleDateString()}
             </time>
           ) : null}
           <h3 className="text-2xl font-bold mb-">
