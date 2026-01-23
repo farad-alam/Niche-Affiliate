@@ -37,7 +37,7 @@ export default function NavBar({
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
                       <div className="p-1 w-[200px]">
-                        {item.childMenu.map((child) => (
+                    {item.childMenu.map((child: any) => (
                           <NavigationMenuLink key={child._key} asChild>
                             <Link
                               href={child.link ? getLinkByLinkObject(child.link) || '#' : '#'}
@@ -114,7 +114,7 @@ export default function NavBar({
                 <>
                   <div className="py-2 px-4 font-medium">{item.text}</div>
                   <div className="pl-4">
-                    {item.childMenu.map((child) => (
+                    {item.childMenu.map((child: any) => (
                       <Link
                         key={child._key}
                         href={child.link ? getLinkByLinkObject(child.link) || '#' : '#'}
