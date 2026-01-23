@@ -41,7 +41,8 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     `Read ${post.title} on our blog`;
 
   // Open Graph image fallback: seo.metaImage → mainImage
-  const ogImage = post.seo?.metaImage?.asset?.url || post.mainImage?.asset?.url;
+  // Note: asset is expanded in the GROQ query with asset->{...}
+  const ogImage = (post.seo?.metaImage?.asset as any)?.url || (post.mainImage?.asset as any)?.url;
 
   return {
     title,
