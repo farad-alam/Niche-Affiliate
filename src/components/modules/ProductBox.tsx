@@ -88,6 +88,7 @@ export const ProductBox: FC<ProductBoxProps> = ({
                       className="w-5 h-5"
                       fill="currentColor"
                       viewBox="0 0 20 20"
+                      aria-hidden="true"
                     >
                       <path
                         fillRule="evenodd"
@@ -99,6 +100,7 @@ export const ProductBox: FC<ProductBoxProps> = ({
                   </h4>
                   <ul className="space-y-1">
                     {pros.map((pro, index) => (
+                      // biome-ignore lint/suspicious/noArrayIndexKey: Static list
                       <li
                         key={index}
                         className="text-sm text-gray-700 flex items-start gap-2"
@@ -119,6 +121,7 @@ export const ProductBox: FC<ProductBoxProps> = ({
                       className="w-5 h-5"
                       fill="currentColor"
                       viewBox="0 0 20 20"
+                      aria-hidden="true"
                     >
                       <path
                         fillRule="evenodd"
@@ -130,6 +133,7 @@ export const ProductBox: FC<ProductBoxProps> = ({
                   </h4>
                   <ul className="space-y-1">
                     {cons.map((con, index) => (
+                      // biome-ignore lint/suspicious/noArrayIndexKey: Static list
                       <li
                         key={index}
                         className="text-sm text-gray-700 flex items-start gap-2"
@@ -157,6 +161,7 @@ export const ProductBox: FC<ProductBoxProps> = ({
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
+              aria-hidden="true"
             >
               <path
                 strokeLinecap="round"

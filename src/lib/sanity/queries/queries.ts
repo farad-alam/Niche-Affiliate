@@ -17,6 +17,11 @@ export const settingsQuery = defineQuery(`*[_type == "settings"][0]{
     },
     alt
   },
+  favicon {
+    asset-> {
+      url
+    }
+  },
   socialMedia {
     facebook,
     twitter,

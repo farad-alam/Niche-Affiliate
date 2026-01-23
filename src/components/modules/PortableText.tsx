@@ -203,6 +203,8 @@ export default function CustomPortableText({
         );
       },
       // Affiliate content types
+      // Affiliate content types
+      // biome-ignore lint/suspicious/noExplicitAny: Sanity Portable Text types are complex
       productBox: (props: any) => {
         const { value } = props;
         if (!value) return null;
@@ -211,6 +213,7 @@ export default function CustomPortableText({
         const { ProductBox } = require('@/components/modules/ProductBox');
         return <ProductBox {...value} />;
       },
+      // biome-ignore lint/suspicious/noExplicitAny: Sanity Portable Text types are complex
       faqSection: (props: any) => {
         const { value } = props;
         if (!value || !value.faqs) return null;
@@ -218,6 +221,7 @@ export default function CustomPortableText({
         const { FAQ } = require('@/components/modules/FAQ');
         return <FAQ title={value.title} faqs={value.faqs} />;
       },
+      // biome-ignore lint/suspicious/noExplicitAny: Sanity Portable Text types are complex
       prosConsList: (props: any) => {
         const { value } = props;
         if (!value) return null;
@@ -231,6 +235,7 @@ export default function CustomPortableText({
           />
         );
       },
+      // biome-ignore lint/suspicious/noExplicitAny: Sanity Portable Text types are complex
       comparisonTable: (props: any) => {
         const { value } = props;
         if (!value || !value.products) return null;

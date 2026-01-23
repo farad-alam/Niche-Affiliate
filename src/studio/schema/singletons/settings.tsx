@@ -40,6 +40,15 @@ export default defineType({
       ],
     }),
     defineField({
+      name: 'favicon',
+      title: 'Favicon',
+      type: 'image',
+      description: 'Upload a favicon.ico or png (recommended 32x32 or 16x16).',
+      options: {
+        accept: 'image/x-icon,image/png,image/svg+xml',
+      },
+    }),
+    defineField({
       name: 'menu',
       type: 'array',
       of: [{ type: 'menuItem' }],

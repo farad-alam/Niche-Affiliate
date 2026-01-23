@@ -10,7 +10,7 @@ const recentPostsQuery =
   title,
   slug,
   excerpt,
-  publishedAt,
+  "publishedAt": coalesce(publishedAt, _createdAt),
   "categories": categories[]->title,
   mainImage {
     asset-> {
@@ -91,7 +91,7 @@ export default async function HomePage() {
             </div>
 
             <div className="relative">
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white transform rotate-2 hover:rotate-0 transition-transform duration-500">
+              <div className="relative w-full h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white transform rotate-2 hover:rotate-0 transition-transform duration-500">
                 <Image
                   src="/images/hero-dog.png"
                   alt="Happy Golden Retriever in a clean home"
