@@ -6,11 +6,10 @@
  */
 
 import { defineCliConfig } from 'sanity/cli';
-import { clientEnv } from '@/env/clientEnv';
 
 export default defineCliConfig({
   api: {
-    projectId: clientEnv.NEXT_PUBLIC_SANITY_PROJECT_ID,
-    dataset: clientEnv.NEXT_PUBLIC_SANITY_DATASET,
+    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
+    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
   },
 });
