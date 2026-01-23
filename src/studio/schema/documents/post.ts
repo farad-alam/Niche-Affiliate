@@ -36,8 +36,8 @@ export default defineType({
       group: 'content',
     }),
     defineField({
-      name: 'image',
-      title: 'Image',
+      name: 'mainImage',
+      title: 'Main image',
       type: 'image',
       group: 'content',
       options: {
@@ -68,8 +68,8 @@ export default defineType({
       ],
     }),
     defineField({
-      name: 'content',
-      title: 'Content',
+      name: 'body',
+      title: 'Body',
       type: 'blockContent',
       group: 'content',
     }),
@@ -80,6 +80,21 @@ export default defineType({
       group: 'content',
     }),
     defineField({
+      name: 'metadata',
+      title: 'Metadata (AutoTent)',
+      type: 'object',
+      description: 'Metadata from AutoTent API - will be used as fallback for SEO fields',
+      group: 'content',
+      fields: [
+        defineField({
+          name: 'description',
+          title: 'Description',
+          type: 'text',
+          rows: 3,
+        }),
+      ],
+    }),
+    defineField({
       name: 'categories',
       title: 'Categories',
       type: 'array',
@@ -87,8 +102,8 @@ export default defineType({
       group: 'content',
     }),
     defineField({
-      name: 'date',
-      title: 'Date',
+      name: 'publishedAt',
+      title: 'Published at',
       type: 'datetime',
       initialValue: () => new Date().toISOString(),
       group: 'content',
@@ -97,7 +112,32 @@ export default defineType({
       name: 'author',
       title: 'Author',
       type: 'reference',
-      to: [{ type: 'person' }],
+      to: [{ type: 'author' }],
+      group: 'content',
+    }),
+    // Affiliate & Review Fields
+    defineField({
+      name: 'productRating',
+      title: 'Product Rating (optional)',
+      type: 'number',
+      validation: (rule) => rule.min(0).max(5).precision(1),
+      description: 'Overall rating for product reviews (0-5 stars). Leave empty for non-review posts.',
+      group: 'content',
+    }),
+    defineField({
+      name: 'showAffiliateDisclosure',
+      title: 'Show Affiliate Disclosure',
+      type: 'boolean',
+      initialValue: true,
+      description: 'Display affiliate disclosure notice at the top of the post',
+      group: 'content',
+    }),
+    defineField({
+      name: 'showTableOfContents',
+      title: 'Show Table of Contents',
+      type: 'boolean',
+      initialValue: false,
+      description: 'Auto-generate table of contents from headings',
       group: 'content',
     }),
     defineField({
@@ -111,14 +151,13 @@ export default defineType({
   preview: {
     select: {
       title: 'title',
-      authorFirstName: 'author.firstName',
-      authorLastName: 'author.lastName',
-      date: 'date',
-      media: 'image',
+      authorName: 'author.name',
+      date: 'publishedAt',
+      media: 'mainImage',
     },
-    prepare({ title, media, authorFirstName, authorLastName, date }) {
+    prepare({ title, media, authorName, date }) {
       const subtitles = [
-        authorFirstName && authorLastName && `by ${authorFirstName} ${authorLastName}`,
+        authorName && `by ${authorName}`,
         date && `on ${format(parseISO(date), 'LLL d, yyyy')}`,
       ].filter(Boolean);
 

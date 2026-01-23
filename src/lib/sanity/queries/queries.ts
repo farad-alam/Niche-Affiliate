@@ -3,7 +3,7 @@ import {
   categoryFragment,
   menuFragment,
   pageFragment,
-  personFragment,
+  authorFragment,
   postCardFragment,
   postFragment,
 } from './fragments/fragments';
@@ -11,6 +11,20 @@ import {
 export const settingsQuery = defineQuery(`*[_type == "settings"][0]{
   title,
   description,
+  logo {
+    asset-> {
+      url
+    },
+    alt
+  },
+  socialMedia {
+    facebook,
+    twitter,
+    instagram,
+    linkedin,
+    youtube
+  },
+  footerText,
   ${menuFragment}
 }`);
 
@@ -62,9 +76,9 @@ export const categoryQuery = defineQuery(`
   }
 `);
 
-export const personQuery = defineQuery(`
-  *[_type == "person" && slug.current == $slug] [0] {
-    ${personFragment}
+export const authorQuery = defineQuery(`
+  *[_type == "author" && slug.current == $slug] [0] {
+    ${authorFragment}
   }
 `);
 
@@ -76,8 +90,8 @@ export const categorySlugs = defineQuery(`
   *[_type == "category" && defined(slug.current)][0..$limit].slug.current
 `);
 
-export const personSlugs = defineQuery(`
-  *[_type == "person" && defined(slug.current)][0..$limit].slug.current
+export const authorSlugs = defineQuery(`
+  *[_type == "author" && defined(slug.current)][0..$limit].slug.current
 `);
 
 export const postsArchiveQuery = defineQuery(`
@@ -107,5 +121,13 @@ export const postsArchiveQuery = defineQuery(`
     "results": allResults[$from..$to] {
       ${postCardFragment}
     }
+  }
+`);
+
+export const allCategoriesQuery = defineQuery(`
+  *[_type == "category" && defined(slug.current)] | order(title asc) {
+    title,
+    slug,
+    _id
   }
 `);

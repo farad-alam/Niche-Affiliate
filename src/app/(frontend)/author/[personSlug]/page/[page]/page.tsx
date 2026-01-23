@@ -7,7 +7,7 @@ import { POSTS_PER_PAGE } from '@/lib/constants';
 import { getDocumentLink } from '@/lib/links';
 import { paginatedData } from '@/lib/pagination';
 import { sanityFetch } from '@/lib/sanity/client/live';
-import { personQuery, postsArchiveQuery } from '@/lib/sanity/queries/queries';
+import { authorQuery, postsArchiveQuery } from '@/lib/sanity/queries/queries';
 
 type Props = {
   params: Promise<{ personSlug: string; page: string }>;
@@ -31,7 +31,7 @@ const loadData = async (props: Props) => {
       params: { from, to, filters: { personSlug } },
     }),
     sanityFetch({
-      query: personQuery,
+      query: authorQuery,
       params: { slug: personSlug },
     }),
   ]);

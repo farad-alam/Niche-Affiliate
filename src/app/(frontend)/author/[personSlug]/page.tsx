@@ -9,7 +9,7 @@ import { getDocumentLink } from '@/lib/links';
 import { paginatedData } from '@/lib/pagination';
 import { client } from '@/lib/sanity/client/client';
 import { sanityFetch } from '@/lib/sanity/client/live';
-import { personQuery, personSlugs, postsArchiveQuery } from '@/lib/sanity/queries/queries';
+import { authorQuery, authorSlugs, postsArchiveQuery } from '@/lib/sanity/queries/queries';
 
 type Props = {
   params: Promise<{ personSlug: string }>;
@@ -27,7 +27,7 @@ const loadData = async (props: Props) => {
       params: { from, to, filters: { personSlug } },
     }),
     sanityFetch({
-      query: personQuery,
+      query: authorQuery,
       params: { slug: personSlug },
     }),
   ]);
@@ -55,13 +55,13 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
 // Return a list of `params` to populate the [slug] dynamic segment
 export async function generateStaticParams() {
-  const slugs = await client.fetch(personSlugs, {
+  const slugs = await client.fetch<(string | null)[]>(authorSlugs, {
     limit: serverEnv.MAX_STATIC_PARAMS,
   });
 
   return slugs
     ? slugs
-        .filter((slug) => slug !== null)
+        .filter((slug): slug is string => slug !== null)
         .map((slug) => ({ personSlug: slug, pagination: undefined }))
     : [];
 }

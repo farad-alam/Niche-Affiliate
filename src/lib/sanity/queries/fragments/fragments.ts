@@ -100,8 +100,8 @@ const markDefsFragment = /* groq */ `
   },
 `;
 
-const contentFragment = /* groq */ `
-  content[]{
+const bodyFragment = /* groq */ `
+  body[]{
     ...,
     ${markDefsFragment}
   },
@@ -147,11 +147,10 @@ export const categoryFragment = /* groq */ `
   description,
 `;
 
-export const personFragment = /* groq */ `
+export const authorFragment = /* groq */ `
   _id,
   _type,
-  firstName,
-  lastName,
+  name,
   image,
   role,
   biography,
@@ -165,16 +164,20 @@ export const postCardFragment = /* groq */ `
   "title": coalesce(title, "Untitled"),
   "slug": slug.current,
   excerpt,
-  image,
+  mainImage,
   "categories": categories[]->{${categoryFragment}},
-  "date": coalesce(date, _updatedAt),
-  "author": author->{${personFragment}},
-  "wordCount": count(string::split(coalesce(pt::text(content), ''), " ")),
+  "publishedAt": coalesce(publishedAt, _updatedAt),
+  "author": author->{${authorFragment}},
+  "wordCount": count(string::split(coalesce(pt::text(body), ''), " ")),
 `;
 
 export const postFragment = /* groq */ `
   ${postCardFragment}
-  ${contentFragment}
+  ${bodyFragment}
+  productRating,
+  showAffiliateDisclosure,
+  showTableOfContents,
+  metadata,
   seo {
     ${seoFragment}
   },
@@ -210,7 +213,7 @@ export const subscribeSectionFragment = /* groq */ `
 export const cardGridFragment = /* groq */ `
   _type,
   heading,
-  ${contentFragment}
+  ${bodyFragment}
   icon,
 `;
 

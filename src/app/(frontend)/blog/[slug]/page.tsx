@@ -24,27 +24,47 @@ const loadData = async (props: Props): Promise<PostQueryResult> => {
 };
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
-  const routeData = await loadData(props);
+  const post = await loadData(props);
 
-  if (!routeData) {
+  if (!post) {
     return {};
   }
 
+  // Fallback chain for meta title: seo.metaTitle → post.title
+  const title = post.seo?.metaTitle || post.title;
+
+  // Fallback chain for meta description: seo.metaDescription → metadata.description (AutoTent) → excerpt → generated
+  const description =
+    post.seo?.metaDescription ||
+    post.metadata?.description ||
+    post.excerpt ||
+    `Read ${post.title} on our blog`;
+
+  // Open Graph image fallback: seo.metaImage → mainImage
+  const ogImage = post.seo?.metaImage?.asset?.url || post.mainImage?.asset?.url;
+
   return {
+    title,
+    description,
     alternates: {
-      canonical: getDocumentLink(routeData, true),
+      canonical: getDocumentLink(post, true),
+    },
+    openGraph: {
+      title: post.seo?.openGraph?.title || title,
+      description: post.seo?.openGraph?.description || description,
+      ...(ogImage && { images: [ogImage] }),
     },
   };
 }
 
 // Return a list of `params` to populate the [slug] dynamic segment
 export async function generateStaticParams() {
-  const slugs = await client.fetch(postPagesSlugs, {
+  const slugs = await client.fetch<(string | null)[]>(postPagesSlugs, {
     limit: serverEnv.MAX_STATIC_PARAMS,
   });
 
   const staticParams = slugs
-    ? slugs.filter((slug) => slug !== null).map((slug) => ({ slug: slug }))
+    ? slugs.filter((slug): slug is string => slug !== null).map((slug) => ({ slug: slug }))
     : [];
 
   return [...staticParams];

@@ -22,6 +22,23 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'logo',
+      title: 'Site Logo',
+      type: 'image',
+      description: 'Upload your custom logo. Recommended: SVG or PNG with transparent background. If not provided, the site title will be displayed.',
+      options: {
+        hotspot: true,
+      },
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alternative text',
+          type: 'string',
+          description: 'Describe your logo for accessibility.',
+        }),
+      ],
+    }),
+    defineField({
       name: 'menu',
       type: 'array',
       of: [{ type: 'menuItem' }],
@@ -32,6 +49,26 @@ export default defineType({
       description: 'Used both for the <meta> description tag for SEO, and the blog subheader.',
       title: 'Description',
       type: 'text',
+    }),
+    defineField({
+      name: 'socialMedia',
+      title: 'Social Media Links',
+      type: 'object',
+      description: 'Your social media profile URLs (Footer)',
+      fields: [
+        defineField({ name: 'facebook', title: 'Facebook URL', type: 'url' }),
+        defineField({ name: 'twitter', title: 'Twitter/X URL', type: 'url' }),
+        defineField({ name: 'instagram', title: 'Instagram URL', type: 'url' }),
+        defineField({ name: 'linkedin', title: 'LinkedIn URL', type: 'url' }),
+        defineField({ name: 'youtube', title: 'YouTube URL', type: 'url' }),
+      ],
+    }),
+    defineField({
+      name: 'footerText',
+      title: 'Footer Copyright Text',
+      type: 'string',
+      description: 'Custom footer text. Use {year} for current year. Example: "© {year} YourSite. All rights reserved."',
+      initialValue: '© {year} Test Affiliate. All rights reserved.',
     }),
     defineField({
       name: 'ogImage',

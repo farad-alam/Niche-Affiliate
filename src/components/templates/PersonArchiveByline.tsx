@@ -13,7 +13,7 @@ export default function PersonArchiveByline({ person }: { person: PersonFragment
           {person.image ? (
             <Image
               src={urlForImage(person.image)?.width(800).height(800).url() as string}
-              alt={`Photo of ${person.firstName} ${person.lastName}`}
+              alt={`Photo of ${person.name}`}
               style={{
                 objectFit: 'cover',
                 position: 'absolute',
@@ -32,7 +32,7 @@ export default function PersonArchiveByline({ person }: { person: PersonFragment
         <div className="flex flex-col justify-center w-full">
           <div className="mb-8">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              {person.firstName} {person.lastName}
+              {person.name}
             </h1>
             {person.role ? <Badge>{person.role}</Badge> : null}
           </div>

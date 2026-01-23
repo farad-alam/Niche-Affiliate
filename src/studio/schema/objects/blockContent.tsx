@@ -81,5 +81,22 @@ export default defineType({
         },
       ],
     }),
+    // Video embed
+    defineArrayMember({
+      type: 'videoEmbed',
+    }),
+    // Affiliate content blocks
+    defineArrayMember({
+      type: 'productBox',
+    }),
+    defineArrayMember({
+      type: 'faqSection',
+    }),
+    defineArrayMember({
+      type: 'prosConsList',
+    }),
+    defineArrayMember({
+      type: 'comparisonTable',
+    }),
   ],
 });

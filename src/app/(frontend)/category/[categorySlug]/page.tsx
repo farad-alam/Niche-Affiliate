@@ -54,13 +54,13 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
 // Return a list of `params` to populate the [slug] dynamic segment
 export async function generateStaticParams() {
-  const slugs = await client.fetch(categorySlugs, {
+  const slugs = await client.fetch<(string | null)[]>(categorySlugs, {
     limit: serverEnv.MAX_STATIC_PARAMS,
   });
 
   return slugs
     ? slugs
-        .filter((slug) => slug !== null)
+        .filter((slug): slug is string => slug !== null)
         .map((slug) => ({ categorySlug: slug, pagination: undefined }))
     : [];
 }

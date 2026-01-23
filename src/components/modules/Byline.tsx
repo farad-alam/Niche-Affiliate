@@ -26,16 +26,13 @@ export default function Byline({ post }: { post: PostCardFragmentType }) {
           <div className="mr-1">By </div>
         )}
         <div className="flex flex-col">
-          {post.author?.firstName && post.author?.lastName && post.author?.slug ? (
-            <Link
-              className="font-bold underline hover:text-gray-700 transition-colors"
-              href={`/author/${post.author.slug}`}
-            >
-              {post.author.firstName} {post.author.lastName}
+          {post.author?.name && post.author?.slug ? (
+            <Link href={`/author/${post.author.slug}`} className="text-gray-900 hover:underline">
+              {post.author.name}
             </Link>
           ) : null}
           <div className="text-gray-500 text-sm">
-            <DateComponent dateString={post.date} />
+            <DateComponent dateString={post.publishedAt} />
           </div>
         </div>
       </div>

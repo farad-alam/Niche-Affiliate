@@ -185,6 +185,43 @@ export default function CustomPortableText({
           </div>
         );
       },
+      // Affiliate content types
+      productBox: (props: any) => {
+        const { value } = props;
+        if (!value) return null;
+        
+        // Import dynamically to avoid circular dependencies
+        const { ProductBox } = require('@/components/modules/ProductBox');
+        return <ProductBox {...value} />;
+      },
+      faqSection: (props: any) => {
+        const { value } = props;
+        if (!value || !value.faqs) return null;
+        
+        const { FAQ } = require('@/components/modules/FAQ');
+        return <FAQ title={value.title} faqs={value.faqs} />;
+      },
+      prosConsList: (props: any) => {
+        const { value } = props;
+        if (!value) return null;
+        
+        const { ProsConsList } = require('@/components/modules/ProsConsList');
+        return <ProsConsList title={value.title} pros={value.pros} cons={value.cons} />;
+      },
+      comparisonTable: (props: any) => {
+        const { value } = props;
+        if (!value || !value.products) return null;
+        
+        const { ComparisonTable } = require('@/components/modules/ComparisonTable');
+        return <ComparisonTable title={value.title} products={value.products} />;
+      },
+      videoEmbed: (props: any) => {
+        const { value } = props;
+        if (!value || !value.url) return null;
+        
+        const { default: VideoEmbed } = require('@/components/modules/VideoEmbed');
+        return <VideoEmbed value={value} />;
+      },
     },
   };
 

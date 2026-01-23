@@ -13,13 +13,11 @@ import {
 } from '@/components/ui/NavigationMenu';
 import { getLinkByLinkObject } from '@/lib/links';
 import { cn } from '@/lib/utils';
-import type { SettingsQueryResult } from '@/sanity.types';
-import { Button } from '../ui/Button';
 
 export default function NavBar({
   menuItems,
 }: {
-  menuItems: NonNullable<NonNullable<SettingsQueryResult>['menu']>;
+  menuItems: any[];
 }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -76,15 +74,6 @@ export default function NavBar({
             ))}
           </NavigationMenuList>
         </NavigationMenu>
-
-        <div className="flex space-x-2">
-          <Button asChild variant="default">
-            <Link href={'/'}>Get Started</Link>
-          </Button>
-          <Button asChild variant="outline">
-            <Link href={'/'}>Log In</Link>
-          </Button>
-        </div>
       </div>
 
       {/* Mobile Menu Button */}
@@ -155,14 +144,6 @@ export default function NavBar({
               )}
             </div>
           ))}
-          <div className="flex flex-col space-y-2 mt-4 p-4">
-            <Button asChild variant="default">
-              <Link href={'/'}>Get Started</Link>
-            </Button>
-            <Button asChild variant="outline">
-              <Link href={'/'}>Log In</Link>
-            </Button>
-          </div>
         </div>
       </div>
     </div>

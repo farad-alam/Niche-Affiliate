@@ -1,6 +1,6 @@
 import category from './documents/category';
 import page from './documents/page';
-import person from './documents/person';
+import author from './documents/author';
 import post from './documents/post';
 import blockContent from './objects/blockContent';
 import button from './objects/button';
@@ -15,20 +15,39 @@ import mediaText from './objects/sections/mediaText';
 import postList from './objects/sections/postList';
 import subscribe from './objects/sections/subscribe';
 import seoTypes from './objects/seo';
+// Affiliate objects
+import comparisonTable from './objects/comparisonTable';
+import faqItem from './objects/faqItem';
+import faqSection from './objects/faqSection';
+import productBox from './objects/productBox';
+import prosConsList from './objects/prosConsList';
+import videoEmbed from './objects/videoEmbed';
 import blogPage from './singletons/blogPage';
 import homePage from './singletons/homePage';
 import settings from './singletons/settings';
+// Affiliate pages
+import aboutPage from './singletons/aboutPage';
+import affiliateDisclosure from './singletons/affiliateDisclosure';
+import contactPage from './singletons/contactPage';
+import privacyPolicy from './singletons/privacyPolicy';
+import termsOfService from './singletons/termsOfService';
 
 export const schemaTypes = [
   // Singletons
   settings,
   homePage,
   blogPage,
+  // Affiliate pages
+  aboutPage,
+  privacyPolicy,
+  termsOfService,
+  affiliateDisclosure,
+  contactPage,
 
   // Documents
   page,
   post,
-  person,
+  author,
   category,
 
   // Sections
@@ -46,5 +65,12 @@ export const schemaTypes = [
   link,
   button,
   menuItem,
+  // Affiliate objects
+  productBox,
+  faqItem,
+  faqSection,
+  prosConsList,
+  comparisonTable,
+  videoEmbed,
   ...seoTypes,
 ];

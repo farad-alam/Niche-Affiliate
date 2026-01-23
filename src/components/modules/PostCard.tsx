@@ -57,7 +57,7 @@ export default function PostCard({ post }: { post: PostCardFragmentType }) {
           <div className="mb-4">
             {author ? (
               <span className="text-sm font-medium text-gray-700">
-                By {author?.firstName} {author?.lastName}
+                By {author?.name}
               </span>
             ) : null}
           </div>
