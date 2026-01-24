@@ -216,7 +216,7 @@ export default async function Footer() {
           )}
 
           {/* Affiliate Disclosure */}
-          <div className="mb-6 text-center">
+          <div className="mb-6 text-center max-w-3xl mx-auto">
             <p className="text-xs text-gray-400">
               PetHygieneLab.com is a participant in the Amazon Services LLC
               Associates Program, an affiliate advertising program designed to

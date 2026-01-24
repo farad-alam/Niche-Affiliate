@@ -9,13 +9,13 @@ export default function Logo({ logoUrl, alt = 'Logo' }: LogoProps) {
   // If custom logo is provided from Sanity, use it
   if (logoUrl) {
     return (
-      <div className="flex items-center justify-center h-8">
+      <div className="flex items-center justify-center h-12">
         <Image
           src={logoUrl}
           alt={alt}
-          width={120}
-          height={32}
-          className="h-8 w-auto object-contain"
+          width={180}
+          height={48}
+          className="h-12 w-auto object-contain"
         />
       </div>
     );
@@ -23,7 +23,7 @@ export default function Logo({ logoUrl, alt = 'Logo' }: LogoProps) {
 
   // Default SVG logo fallback
   return (
-    <div className="[&_path]:fill-black flex items-center justify-center w-7 h-7">
+    <div className="[&_path]:fill-black flex items-center justify-center w-10 h-10">
       <svg
         className="w-full"
         xmlns="http://www.w3.org/2000/svg"
