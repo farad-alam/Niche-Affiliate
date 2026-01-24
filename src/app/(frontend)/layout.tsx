@@ -20,10 +20,10 @@ import dynamic from 'next/dynamic';
 import Alert from '@/components/layout/Alert';
 import { sanityFetch } from '@/lib/sanity/client/live';
 import { settingsQuery } from '@/lib/sanity/queries/queries';
-import type { SettingsQueryResult } from '@/sanity.types';
+
 
 export async function generateMetadata(): Promise<Metadata> {
-  const settings = await sanityFetch<SettingsQueryResult>({
+  const { data: settings } = await sanityFetch({
     query: settingsQuery,
   });
 
