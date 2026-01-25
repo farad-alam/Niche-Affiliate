@@ -19,6 +19,7 @@ import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import Alert from '@/components/layout/Alert';
 import { sanityFetch } from '@/lib/sanity/client/live';
+import ReactDOM from 'react-dom';
 import { settingsQuery } from '@/lib/sanity/queries/queries';
 
 
@@ -44,6 +45,13 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const { isEnabled: isDraftMode } = await draftMode();
+  
+  // Preconnect to Sanity CDN for faster image loading
+  // @ts-ignore
+  if (typeof ReactDOM !== 'undefined' && typeof ReactDOM.preconnect === 'function') {
+     // @ts-ignore
+     ReactDOM.preconnect('https://cdn.sanity.io');
+  }
 
   return (
     <body

@@ -78,5 +78,10 @@
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": "biome check"
-  }
+  },
+  "browserslist": [
+    "defaults",
+    "not IE 11",
+    "maintained node versions"
+  ]
 }

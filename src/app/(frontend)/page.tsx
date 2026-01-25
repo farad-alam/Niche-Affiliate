@@ -98,6 +98,7 @@ export default async function HomePage() {
                   className="object-cover"
                   fill
                   priority
+                  fetchPriority="high"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
