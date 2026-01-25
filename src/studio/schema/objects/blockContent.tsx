@@ -98,5 +98,8 @@ export default defineType({
     defineArrayMember({
       type: 'comparisonTable',
     }),
+    defineArrayMember({
+      type: 'table',
+    }),
   ],
 });

@@ -7,6 +7,7 @@
 
 import { assist } from '@sanity/assist';
 import { visionTool } from '@sanity/vision';
+import { table } from '@sanity/table';
 import { defineConfig } from 'sanity';
 import {
   type DocumentLocation,
@@ -115,6 +116,7 @@ export default defineConfig({
     // Additional plugins for enhanced functionality
     assist(),
     visionTool(),
+    table(),
   ],
   schema: {
     types: schemaTypes,

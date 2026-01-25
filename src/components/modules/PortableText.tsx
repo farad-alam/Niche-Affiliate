@@ -256,6 +256,12 @@ export default function CustomPortableText({
         } = require('@/components/modules/VideoEmbed');
         return <VideoEmbed value={value} />;
       },
+      // biome-ignore lint/suspicious/noExplicitAny: Sanity Portable Text types are complex
+      table: (props: any) => {
+        const { value } = props;
+        const { Table } = require('@/components/modules/Table');
+        return <Table value={value} />;
+      },
     },
   };
 
