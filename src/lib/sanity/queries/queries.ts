@@ -29,6 +29,8 @@ export const settingsQuery = defineQuery(`*[_type == "settings"][0]{
     linkedin,
     youtube
   },
+  googleSiteVerificationId,
+  googleAnalyticsId,
   footerText,
   ${menuFragment}
 }`);

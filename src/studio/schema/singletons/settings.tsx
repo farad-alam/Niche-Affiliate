@@ -125,6 +125,26 @@ export default defineType({
         }),
       ],
     }),
+    defineField({
+      name: 'googleSiteVerificationId',
+      title: 'Google Site Verification ID',
+      type: 'string',
+      description: 'The code from the "HTML tag" verification method in GSC (e.g., the "content" part of the meta tag).',
+      group: 'seo',
+    }),
+    defineField({
+      name: 'googleAnalyticsId',
+      title: 'Google Analytics Measurement ID',
+      type: 'string',
+      description: 'Your GA4 Measurement ID (starts with "G-").',
+      group: 'seo',
+    }),
+  ],
+  groups: [
+    {
+      name: 'seo',
+      title: 'SEO & Analytics',
+    },
   ],
   preview: {
     prepare() {

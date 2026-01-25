@@ -5,6 +5,7 @@ import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
 import Main from '@/components/layout/Main';
 import { SanityLive } from '@/lib/sanity/client/live';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import { handleError } from './client-utils';
 
 const DraftModeToast = dynamic(
@@ -34,6 +35,10 @@ export async function generateMetadata(): Promise<Metadata> {
           icon: settings.favicon.asset.url,
           shortcut: settings.favicon.asset.url,
           apple: settings.favicon.asset.url,
+        }
+    verification: settings?.googleSiteVerificationId
+      ? {
+          google: settings.googleSiteVerificationId,
         }
       : undefined,
   };
@@ -68,6 +73,9 @@ export default async function RootLayout({
             {/*  Enable Visual Editing, only to be rendered when Draft Mode is enabled */}
             <VisualEditing />
           </>
+        )}
+        {settings?.googleAnalyticsId && (
+           <GoogleAnalytics gaId={settings.googleAnalyticsId} />
         )}
         {/* The <SanityLive> component is responsible for making all sanityFetch calls in your application live, so should always be rendered. */}
         <SanityLive onError={handleError} />
