@@ -36,6 +36,7 @@ export async function generateMetadata(): Promise<Metadata> {
           shortcut: settings.favicon.asset.url,
           apple: settings.favicon.asset.url,
         }
+      : undefined,
     verification: settings?.googleSiteVerificationId
       ? {
           google: settings.googleSiteVerificationId,
@@ -50,6 +51,9 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const { isEnabled: isDraftMode } = await draftMode();
+  const { data: settings } = await sanityFetch({
+    query: settingsQuery,
+  });
   
   // Preconnect to Sanity CDN for faster image loading
   // @ts-ignore
