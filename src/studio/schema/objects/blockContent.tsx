@@ -1,5 +1,5 @@
 import { ImageIcon } from '@sanity/icons';
-import { defineArrayMember, defineField, defineType } from 'sanity';
+import { defineArrayMember, defineType } from 'sanity';
 
 /**
  * This is the schema definition for the rich text fields used for
@@ -50,14 +50,15 @@ export default defineType({
         ],
         annotations: [
           {
-            name: 'customLink',
+            title: 'URL',
+            name: 'link', // ✅ This matches what the system generates
             type: 'object',
-            title: 'Link',
             fields: [
-              defineField({
-                name: 'customLink',
-                type: 'link',
-              }),
+              {
+                title: 'URL',
+                name: 'href',
+                type: 'url',
+              },
             ],
           },
         ],
