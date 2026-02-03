@@ -157,8 +157,16 @@ export default function CustomPortableText({
         children: ReactNode;
         value?: { href?: string; blank?: boolean; rel?: string };
       }) => {
-        if (!value?.href) {
-          return <>{children}</>;
+        let href = value.href || '';
+        
+        // Correct internal links that should be under /blog
+        if (href.startsWith('/') && !href.startsWith('/blog/')) {
+           const knownRootPages = ['/about', '/contact', '/privacy-policy', '/terms-of-service', '/affiliate-disclosure', '/search'];
+           const isRootPage = knownRootPages.some(page => href === page || href.startsWith(`${page}/`));
+           
+           if (!isRootPage && href !== '/') {
+             href = `/blog${href}`;
+           }
         }
 
         const target = value.blank ? '_blank' : undefined;
@@ -167,7 +175,7 @@ export default function CustomPortableText({
 
         return (
           <Link
-            href={value.href}
+            href={href}
             target={target}
             rel={rel}
             className="text-primary hover:no-underline underline"
