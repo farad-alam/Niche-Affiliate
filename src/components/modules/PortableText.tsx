@@ -15,9 +15,8 @@ import {
   type PortableTextComponents,
 } from 'next-sanity';
 import type { PropsWithChildren, ReactNode } from 'react';
-import Link from '@/components/modules/Link';
+import Link from 'next/link';
 import { urlForImage } from '@/lib/sanity/client/utils';
-import type { LinkFragmentType } from '@/lib/sanity/queries/fragments/fragment.types';
 import { cn } from '@/lib/utils';
 import { parseChildrenToSlug } from '@/utils/strings';
 
@@ -156,17 +155,21 @@ export default function CustomPortableText({
         value,
       }: {
         children: ReactNode;
-        value?: { customLink: LinkFragmentType };
+        value?: { href?: string; blank?: boolean; rel?: string };
       }) => {
-        const customLink = value?.customLink;
-
-        if (!customLink) {
+        if (!value?.href) {
           return <>{children}</>;
         }
 
+        const target = value.blank ? '_blank' : undefined;
+        // Default rel for new tabs if not specified
+        const rel = value.rel || (value.blank ? 'noopener noreferrer' : undefined);
+
         return (
           <Link
-            link={customLink}
+            href={value.href}
+            target={target}
+            rel={rel}
             className="text-primary hover:no-underline underline"
           >
             {children}
