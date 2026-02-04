@@ -60,19 +60,10 @@ export const getPageQuery = defineQuery(`
 `);
 
 export const getSitemapQuery = defineQuery(`
-  *[((_type in ["page", "post", "category", "author"] && defined(slug.current)) || (_type in ["homePage", "aboutPage", "contactPage", "privacyPolicy", "termsOfService", "affiliateDisclosure"])) && seo.noIndex != true]{
+  *[((_type == "post" && defined(slug.current)) || (_type == "homePage")) && seo.noIndex != true]{
     "href": select(
       _type == "homePage" => "/",
-      _type == "aboutPage" => "/about",
-      _type == "contactPage" => "/contact",
-      _type == "privacyPolicy" => "/privacy-policy",
-      _type == "termsOfService" => "/terms-of-service",
-      _type == "affiliateDisclosure" => "/affiliate-disclosure",
-      _type == "page" => "/" + slug.current,
-      _type == "post" => "/blog/" + slug.current,
-      _type == "category" => "/category/" + slug.current,
-      _type == "author" => "/author/" + slug.current,
-      slug.current
+      _type == "post" => "/blog/" + slug.current
     ),
     _updatedAt
   }
