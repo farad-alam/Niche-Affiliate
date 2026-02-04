@@ -157,7 +157,7 @@ export default function CustomPortableText({
         children: ReactNode;
         value?: { href?: string; blank?: boolean; rel?: string };
       }) => {
-        let href = value.href || '';
+        let href = value?.href || '';
         
         // Correct internal links that should be under /blog
         if (href.startsWith('/') && !href.startsWith('/blog/')) {
@@ -169,9 +169,9 @@ export default function CustomPortableText({
            }
         }
 
-        const target = value.blank ? '_blank' : undefined;
+        const target = value?.blank ? '_blank' : undefined;
         // Default rel for new tabs if not specified
-        const rel = value.rel || (value.blank ? 'noopener noreferrer' : undefined);
+        const rel = value?.rel || (value?.blank ? 'noopener noreferrer' : undefined);
 
         return (
           <Link
