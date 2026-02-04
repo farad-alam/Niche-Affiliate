@@ -1,10 +1,16 @@
 'use server';
 
-import { Resend } from 'resend';
+import nodemailer from 'nodemailer';
 import { serverEnv } from '@/env/serverEnv';
 import { clientEnv } from '@/env/clientEnv';
 
-const resend = new Resend(serverEnv.RESEND_API_KEY);
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: serverEnv.GMAIL_USER,
+    pass: serverEnv.GMAIL_APP_PASSWORD,
+  },
+});
 
 export async function sendEmail(prevState: any, formData: FormData) {
   const name = formData.get('name') as string;
@@ -17,22 +23,17 @@ export async function sendEmail(prevState: any, formData: FormData) {
   }
 
   try {
-    const data = await resend.emails.send({
-      from: 'Contact Form <onboarding@resend.dev>', // Update this if you have a custom domain
-      to: serverEnv.CONTACT_EMAIL, 
+    await transporter.sendMail({
+      from: `"${name}" <${serverEnv.GMAIL_USER}>`, // Sender address (must be authenticated user)
+      to: serverEnv.CONTACT_EMAIL, // List of receivers
+      replyTo: email, // Reply to the user's email
       subject: `Email from ${clientEnv.NEXT_PUBLIC_SITE_NAME} - ${subject}`,
       text: `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\n\nMessage:\n${message}`,
-      replyTo: email,
     });
-
-    if (data.error) {
-      console.error('Resend Error:', data.error);
-      return { success: false, message: 'Failed to send email. Please try again.' };
-    }
 
     return { success: true, message: 'Message sent successfully!' };
   } catch (error) {
     console.error('Server Error:', error);
-    return { success: false, message: 'Something went wrong.' };
+    return { success: false, message: 'Failed to send email. Please try again.' };
   }
 }

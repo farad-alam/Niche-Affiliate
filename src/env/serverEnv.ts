@@ -12,7 +12,8 @@ const envSchema = {
     v.minValue(1),
     v.maxValue(1000)
   ),
-  RESEND_API_KEY: v.pipe(v.string(), v.minLength(1)),
+  GMAIL_USER: v.pipe(v.string(), v.email()),
+  GMAIL_APP_PASSWORD: v.pipe(v.string(), v.minLength(1)),
   CONTACT_EMAIL: v.pipe(v.string(), v.email()),
 };
 const serverEnv = createEnv(envSchema);
