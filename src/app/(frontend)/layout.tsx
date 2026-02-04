@@ -42,6 +42,10 @@ export async function generateMetadata(): Promise<Metadata> {
           google: settings.googleSiteVerificationId,
         }
       : undefined,
+    robots: {
+      index: true,
+      follow: true,
+    },
   };
 }
 
