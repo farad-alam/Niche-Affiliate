@@ -15,7 +15,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: new URL(path.href!, baseUrl).toString(),
       lastModified: new Date(path._updatedAt),
       changeFrequency: 'weekly',
-      priority: 1,
+      priority: path.priority || 0.5,
     }));
   } catch (error) {
     console.error('Failed to generate sitemap:', error);
