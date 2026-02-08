@@ -21,7 +21,8 @@ export async function POST(req: NextRequest) {
     // Revalidate the homepage for any post change
     if (body._type === 'post') {
       revalidatePath('/');
-      console.log('Revalidated homepage due to post change');
+      revalidatePath('/sitemap.xml'); // Update sitemap
+      console.log('Revalidated homepage and sitemap due to post change');
       
       // Also revalidate the specific post page if slug exists
       if (body.slug?.current) {
