@@ -5,12 +5,12 @@ import { serverEnv } from '@/env/serverEnv';
 
 export async function POST(req: NextRequest) {
   try {
-    const { isValid, body } = await parseBody<{ _type: string; slug?: { current: string } }>(
+    const { isValidSignature, body } = await parseBody<{ _type: string; slug?: { current: string } }>(
       req,
       serverEnv.SANITY_REVALIDATE_SECRET
     );
 
-    if (!isValid) {
+    if (!isValidSignature) {
       return new NextResponse('Invalid Signature', { status: 401 });
     }
 
