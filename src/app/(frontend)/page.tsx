@@ -6,7 +6,7 @@ import { sanityFetch } from '@/lib/sanity/client/live';
 // Query for recent posts
 // Query for recent posts
 const recentPostsQuery =
-  defineQuery(`*[_type == "post"] | order(publishedAt desc) [0...18] {
+  defineQuery(`*[_type == "post"] | order(coalesce(publishedAt, _createdAt) desc) [0...18] {
   title,
   slug,
   excerpt,
