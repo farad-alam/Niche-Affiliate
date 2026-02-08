@@ -15,6 +15,7 @@ const envSchema = {
   GMAIL_USER: v.pipe(v.string(), v.email()),
   GMAIL_APP_PASSWORD: v.pipe(v.string(), v.minLength(1)),
   CONTACT_EMAIL: v.pipe(v.string(), v.email()),
+  SANITY_REVALIDATE_SECRET: v.pipe(v.string(), v.minLength(1)),
 };
 const serverEnv = createEnv(envSchema);
 export { serverEnv };
