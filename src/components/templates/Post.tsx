@@ -24,7 +24,11 @@ const Post = ({ post }: Props) => {
     <div className="container mx-auto max-w-5xl pt-5 md:pt-8 pb-12">
       {post.mainImage?.asset?._ref ? (
         <div className="mb-12">
-          <CoverImage image={post.mainImage} priority />
+          <CoverImage
+            image={post.mainImage}
+            fallbackAlt={post.title}
+            priority
+          />
         </div>
       ) : null}
 
