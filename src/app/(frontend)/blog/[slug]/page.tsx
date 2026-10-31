@@ -84,5 +84,37 @@ export default async function PostPage(props: Props) {
     notFound();
   }
 
-  return <Post post={post} />;
+  // BlogPosting JSON-LD so Google can understand this page as an article
+  // (byline, publish date, image) and qualify it for article-rich results.
+  const postUrl = getDocumentLink(post, true);
+  // biome-ignore lint/suspicious/noExplicitAny: Schema type mismatch
+  const imageUrl = (post.mainImage?.asset as any)?.url;
+
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.excerpt || undefined,
+    image: imageUrl ? [imageUrl] : undefined,
+    datePublished: post.publishedAt || undefined,
+    dateModified: post.publishedAt || undefined,
+    mainEntityOfPage: postUrl,
+    ...(post.author?.name && {
+      author: {
+        '@type': 'Person',
+        name: post.author.name,
+      },
+    }),
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD for SEO requires this
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <Post post={post} />
+    </>
+  );
 }
