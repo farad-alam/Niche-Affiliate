@@ -1,6 +1,9 @@
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { defineQuery } from 'next-sanity';
+import { clientEnv } from '@/env/clientEnv';
+import { getBaseURL } from '@/lib/links';
 import { sanityFetch } from '@/lib/sanity/client/live';
 
 // Query for recent posts
@@ -39,8 +42,39 @@ export default async function HomePage() {
     query: recentPostsQuery,
   })) as { data: RecentPost[] };
 
+  const baseUrl = getBaseURL();
+  const siteName = clientEnv.NEXT_PUBLIC_SITE_NAME || 'PetHygieneLab';
+
+  // Organization + WebSite JSON-LD so search engines can associate the
+  // site's content with a known entity (also required for several rich
+  // result types). Rendered server-side so it's present in the initial
+  // HTML, no client JS needed.
+  const organizationSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: siteName,
+    url: baseUrl,
+  };
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: siteName,
+    url: baseUrl,
+  };
+
   return (
     <div className="min-h-screen font-sans text-slate-800">
+      {/* JSON-LD Schema */}
+      <script
+        type="application/ld+json"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD for SEO requires this
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD for SEO requires this
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-teal-50 to-white relative overflow-hidden pt-20 pb-24 lg:pt-28 lg:pb-32">
         <div className="container mx-auto px-4 max-w-7xl relative z-10">
@@ -417,8 +451,19 @@ export default async function HomePage() {
   );
 }
 
-export const metadata = {
-  title: 'PetHygieneLab.com - Solutions for Pet Smell & Hygiene',
-  description:
-    'Expert reviews on pet odor eliminators, grooming tools, and hygiene solutions. Keep your home fresh and your pets healthy.',
+const title = 'PetHygieneLab.com - Solutions for Pet Smell & Hygiene';
+const description =
+  'Expert reviews on pet odor eliminators, grooming tools, and hygiene solutions. Keep your home fresh and your pets healthy.';
+
+export const metadata: Metadata = {
+  title,
+  description,
+  alternates: {
+    canonical: getBaseURL() || undefined,
+  },
+  openGraph: {
+    title,
+    description,
+    url: getBaseURL() || undefined,
+  },
 };
